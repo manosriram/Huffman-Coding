@@ -4,11 +4,11 @@
 using namespace std;
 
 int main() {
-     fstream newFile;
+    fstream newFile;
     map<char, int> mp;
     int total = 0;
     newFile.open("in.txt", ios::in);
-    
+
     if (newFile.is_open()) {
         string tp;
         while (getline(newFile, tp)) {
@@ -18,10 +18,10 @@ int main() {
                 ++total;
             }
         }
-    newFile.close();
+        newFile.close();
     }
 
-    cout << "Total Letters: " << total << endl; 
+    cout << "Total Letters: " << total << endl;
 
     for (auto t=mp.begin();t!=mp.end();t++) {
         cout << "Character: " << t->first << "\tOccurences: " << t->second << "\tFrequency: " << (double)t->second/total * 100 << endl;
