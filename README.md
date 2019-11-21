@@ -1,4 +1,6 @@
-### Huffman Compression.
+# **Huffman Compression.**
+
+![Tree](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi2.wp.com%2Fwww.techiedelight.com%2Fwp-content%2Fuploads%2F2016%2F11%2FHuffman-Coding-6.png%3Fresize%3D426%252C413%26ssl%3D1&f=1&nofb=1)
 
 ## Introduction.
       Huffman code is a particular type of optimal prefix code that is commonly used for lossless data compression.
