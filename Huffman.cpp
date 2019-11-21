@@ -15,7 +15,7 @@ vector<string> v;
 
 int main() {
 
-        priority_queue<pair< double, MinHeap *>, vector<pair<double, MinHeap *> >, greater<pair< double, MinHeap *>> > q;
+    priority_queue<pair< double, MinHeap *>, vector<pair<double, MinHeap *> >, greater<pair< double, MinHeap *>> > q;
     map<char, pair<int, string> > mp;
     fstream newFile;
     newFile.open("in.txt", ios::in | ios::out);
