@@ -8,7 +8,7 @@ using namespace std;
 struct MinHeap {
     double freq;
     char character;
-    MinHeap *left, *right; 
+    MinHeap *left, *right;
     bool isLeaf;
 };
 
@@ -16,17 +16,16 @@ void printHeap(MinHeap *heap) {
     cout << "Character: " << heap->character << " Frequency: " << heap->freq << endl;
 }
 string path = "";
-void search(char c, MinHeap *root) {
+string search(char c, MinHeap *root) {
     if (!root)
-        return;
+        return nullptr;
 
     if (root->isLeaf && c == root->character) {
-         cout << "Found " << c << ", has frequency " << root->freq << endl;
-        cout << path;
-        return;
+        cout << "Found " << c << ", has frequency " << root->freq << endl;
+        return path;
     }
-    
-    path.push_back('0'); 
+
+    path.push_back('0');
     search(c, root->left);
     path.pop_back();
     path.push_back('1');
@@ -48,7 +47,7 @@ void Traverse(MinHeap *root) {
 int main() {
     priority_queue<pair< double, MinHeap *>, vector<pair<double, MinHeap *> >, greater<pair< double, MinHeap *>> > q;
     fstream newFile;
-    map<char, int> mp;
+    map<char, pair<int, string> > mp;
     int total = 0;
     newFile.open("in.txt", ios::in);
 
@@ -57,7 +56,7 @@ int main() {
         while (getline(newFile, tp)) {
             int n = tp.end() - tp.begin();
             for (int t=0;t<n;t++) {
-                ++mp[tp[t]];
+                ++mp[tp[t]].first;
                 ++total;
             }
         }
@@ -68,7 +67,7 @@ int main() {
 
     for (auto t=mp.begin();t!=mp.end();t++) {
         MinHeap *hp = new MinHeap();
-        hp->freq = (double)t->second/total * 100;
+        hp->freq = (double)t->second.first/total * 100;
         hp->character = t->first;
         hp->isLeaf = true;
         q.push(make_pair(hp->freq, hp));
@@ -90,6 +89,9 @@ int main() {
     }
     MinHeap *root = q.top().second;
     q.pop();
-    search('c', root);
- //   Traverse(root);
+    for (auto t = mp.begin(); t!=mp.end();++t) {
+        t->second.second = search(t->first, root);
+    }
+
+    //   Traverse(root);
 }
