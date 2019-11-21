@@ -1,97 +1,39 @@
 #include <iostream>
+#include <vector>
 #include <fstream>
 #include <queue>
 #include <map>
 #include <functional>
+#include "HuffStruct.hpp"
+MinHeap *Node = new MinHeap();
 using namespace std;
-
-struct MinHeap {
-    double freq;
-    char character;
-    MinHeap *left, *right;
-    bool isLeaf;
-};
-
-void printHeap(MinHeap *heap) {
-    cout << "Character: " << heap->character << " Frequency: " << heap->freq << endl;
-}
-string path = "";
-string search(char c, MinHeap *root) {
-    if (!root)
-        return nullptr;
-
-    if (root->isLeaf && c == root->character) {
-        cout << "Found " << c << ", has frequency " << root->freq << endl;
-        return path;
-    }
-
-    path.push_back('0');
-    search(c, root->left);
-    path.pop_back();
-    path.push_back('1');
-    search(c, root->right);
-    path.pop_back();
-}
-
-void Traverse(MinHeap *root) {
-    if (!root)
-        return;
-
-    if (root->isLeaf)
-        cout << root->character << " " << root->freq << endl;
-
-    Traverse(root->left);
-    Traverse(root->right);
-}
+int total;
+string path = "", decoded = "";
+vector<string> v;
+#include "Encode.hpp"
+#include "Decode.hpp"
 
 int main() {
-    priority_queue<pair< double, MinHeap *>, vector<pair<double, MinHeap *> >, greater<pair< double, MinHeap *>> > q;
-    fstream newFile;
+
+        priority_queue<pair< double, MinHeap *>, vector<pair<double, MinHeap *> >, greater<pair< double, MinHeap *>> > q;
     map<char, pair<int, string> > mp;
-    int total = 0;
-    newFile.open("in.txt", ios::in);
+    fstream newFile;
+    newFile.open("in.txt", ios::in | ios::out);
 
     if (newFile.is_open()) {
         string tp;
         while (getline(newFile, tp)) {
             int n = tp.end() - tp.begin();
+            txt += tp;
             for (int t=0;t<n;t++) {
                 ++mp[tp[t]].first;
                 ++total;
             }
         }
-        newFile.close();
     }
-
     cout << "Total Letters: " << total << endl;
 
-    for (auto t=mp.begin();t!=mp.end();t++) {
-        MinHeap *hp = new MinHeap();
-        hp->freq = (double)t->second.first/total * 100;
-        hp->character = t->first;
-        hp->isLeaf = true;
-        q.push(make_pair(hp->freq, hp));
-    }
-
-    while (q.size() > 1) {
-        MinHeap *hp = new MinHeap();
-        MinHeap *tp1 = new MinHeap();
-        tp1 = q.top().second;
-        q.pop();
-        MinHeap *tp2 = new MinHeap();
-        tp2 = q.top().second;
-        q.pop();
-        hp->freq = tp1->freq + tp2->freq;
-        hp->left = tp1;
-        hp->right = tp2;
-        hp->isLeaf = false;
-        q.push(make_pair(hp->freq, hp));
-    }
-    MinHeap *root = q.top().second;
-    q.pop();
-    for (auto t = mp.begin(); t!=mp.end();++t) {
-        t->second.second = search(t->first, root);
-    }
-
-    //   Traverse(root);
+    string t = Encode(mp, q);
+    Decode(t, Node, 0);
+    cout << decoded << endl;
 }
