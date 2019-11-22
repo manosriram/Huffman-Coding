@@ -25,9 +25,11 @@ void search(char c, MinHeap *root) {
     path.pop_back();
 }
 
-string Encode(map<char, pair<int, string> > mp,
+pair<string, MinHeap *>  Encode(map<char, pair<int, string> > mp,
         priority_queue<pair< double, MinHeap *>, vector<pair<double, MinHeap *> >, greater<pair< double, MinHeap *>> > q) {
+
     MinHeap *root = BuildTree(mp, q);
+
     for (auto t = mp.begin(); t!=mp.end();++t) {
         search(t->first, root);
         t->second.second = v[0];
@@ -38,6 +40,9 @@ string Encode(map<char, pair<int, string> > mp,
     for (int t=0;t<txt.length();t++) {
         temp += mp[txt[t]].second;
     }
-    return temp;
+    pair<string, MinHeap *> p;
+    p.first = temp;
+    p.second = root;
+    return p;
 }
 #endif

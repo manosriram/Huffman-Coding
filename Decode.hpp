@@ -1,32 +1,22 @@
 #ifndef DEC
 #define DEC
 #include "HuffStruct.hpp"
-bool taken = false; 
-void Decode(string enc, MinHeap *root, int ind) {
+bool taken = false;
+string Decode(string enc, MinHeap *root) {
+    string decoded = "";
+    MinHeap *Node = root;
+    for (int t=0;t<enc.length();t++) {
+        if (enc[t] == '0')
+            root = root->left;
+        else
+            root = root->right;
 
-    if (!root)
-        return;
-
-    if (!taken) {
-        Node = root;
-        taken = true;
+        if (!root->left && !root->right) {
+            decoded.push_back(root->character);
+            root = Node;
+        }
     }
-
-    if (root->isLeaf) {
-        decoded.push_back(root->character);
-        cout << decoded << endl;
-        root = Node;
-        return; 
-    }
-
-    if (enc[ind] == '0') {
-        ++ind;
-        Decode(enc, root->left, ind);
-    } else if (enc[ind] == '1') {
-        ++ind;
-        Decode(enc, root->right, ind);
-    }
-    --ind;
+    return decoded;
 }
 
 #endif

@@ -5,10 +5,9 @@
 #include <map>
 #include <functional>
 #include "HuffStruct.hpp"
-MinHeap *Node = new MinHeap();
 using namespace std;
 int total;
-string path = "", decoded = "";
+string path = "";
 vector<string> v;
 #include "Encode.hpp"
 #include "Decode.hpp"
@@ -33,7 +32,7 @@ int main() {
     }
     cout << "Total Letters: " << total << endl;
 
-    string t = Encode(mp, q);
-    Decode(t, Node, 0);
+    auto pr = Encode(mp, q);
+    string decoded = Decode(pr.first, pr.second);
     cout << decoded << endl;
 }
