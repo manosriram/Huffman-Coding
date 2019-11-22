@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <bitset>
 #include <fstream>
 #include <queue>
 #include <map>
@@ -11,6 +12,7 @@ string path = "";
 vector<string> v;
 #include "Encode.hpp"
 #include "Decode.hpp"
+#include "BuildTree.hpp"
 
 int main() {
 
@@ -29,10 +31,14 @@ int main() {
                 ++total;
             }
         }
+        newFile.close();
     }
     cout << "Total Letters: " << total << endl;
+    int total = total * 4;
 
-    auto pr = Encode(mp, q);
-    string decoded = Decode(pr.first, pr.second);
-    cout << decoded << endl;
+    auto root = BuildTree(mp, q);
+    root = Encode(mp, q, root);
+    // pr.first -> Encoded String..
+   // Decode(root);
+    newFile.close();
 }

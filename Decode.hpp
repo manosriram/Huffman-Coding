@@ -2,21 +2,15 @@
 #define DEC
 #include "HuffStruct.hpp"
 bool taken = false;
-string Decode(string enc, MinHeap *root) {
+
+string Decode(MinHeap *root) {
+
     string decoded = "";
+    file.open("out.txt", ios::out | ios::binary | ios::in);
     MinHeap *Node = root;
-    for (int t=0;t<enc.length();t++) {
-        if (enc[t] == '0')
-            root = root->left;
-        else
-            root = root->right;
+    
+    
 
-        if (root->isLeaf) {
-            decoded.push_back(root->character);
-            root = Node;
-        }
-    }
-    return decoded;
+
 }
-
 #endif
