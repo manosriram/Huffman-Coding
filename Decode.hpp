@@ -11,7 +11,7 @@ string Decode(string enc, MinHeap *root) {
         else
             root = root->right;
 
-        if (!root->left && !root->right) {
+        if (root->isLeaf) {
             decoded.push_back(root->character);
             root = Node;
         }
