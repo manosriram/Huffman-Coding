@@ -39,6 +39,7 @@ int main() {
     auto root = BuildTree(mp, q);
     root = Encode(mp, q, root);
     // pr.first -> Encoded String..
-   // Decode(root);
+   cout <<  Decode(root);
+    
     newFile.close();
 }

@@ -27,7 +27,7 @@ void search(char c, MinHeap *root) {
     search(c, root->right);
     path.pop_back();
 }
-unsigned int ch;
+unsigned char ch;
 int bitC = 0;
 
 int reverseByte(int num) {
@@ -43,8 +43,9 @@ int reverseByte(int num) {
 }
 
 void writeByte(int byte) {
-    byte = reverseByte(byte);
-    cout << "Byte: " << byte << endl;
+    //byte = reverseByte(byte);
+    file.write((char *) &ch, sizeof(char));
+    return;
     int n = sizeof(int);
     while (byte) {
         file << (byte & 1);
@@ -60,7 +61,7 @@ void writeByte(int byte) {
 
 
 void writeBit(int bit) {
-    ch = (ch << 1) | bit;
+    ch |= (bit << bitC);
 
     if (++bitC == 8) {
         writeByte(ch);

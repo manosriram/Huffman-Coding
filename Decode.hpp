@@ -5,12 +5,11 @@ bool taken = false;
 
 string Decode(MinHeap *root) {
 
-    string decoded = "";
-    file.open("out.txt", ios::out | ios::binary | ios::in);
-    MinHeap *Node = root;
-    
-    
-
-
+    file.open("out.txt", ios::in | ios::out | ios::binary); 
+    string tp; 
+    while(getline(file, tp)) {
+        cout << tp;
+    }
+    return tp;
 }
 #endif
