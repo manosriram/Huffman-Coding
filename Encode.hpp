@@ -28,9 +28,8 @@ void search(char c, MinHeap *root) {
     path.pop_back();
 }
 
-unsigned char ch;
+unsigned char ch = 0;
 int bitC = 0;
-
 void writeBit(int bit) {
     ch = (ch << 1) | bit;
     if (++bitC == 8) {
@@ -52,6 +51,9 @@ MinHeap *Encode(map<char, pair<int, string> > mp,
     }
 
     for (int t=0;t<txt.length();t++) {
+        if (txt[t] == '\n') {
+            file << '\n' << '\n';
+        }
         int n = mp[txt[t]].second.end() - mp[txt[t]].second.begin();
         for (int t1=0;t1<n;t1++) {
             char temp = mp[txt[t]].second[t1];
@@ -60,8 +62,11 @@ MinHeap *Encode(map<char, pair<int, string> > mp,
                 writeBit(1);
             else
                 writeBit(0);
+
+            ++byt;
         }
     }
+    cout << byt << endl;
     file.close();
     return root;
 }

@@ -9,6 +9,7 @@
 using namespace std;
 int total;
 string path = "";
+static int byt;
 vector<string> v;
 #include "Encode.hpp"
 #include "Decode.hpp"
@@ -24,6 +25,10 @@ int main() {
     if (newFile.is_open()) {
         string tp;
         while (getline(newFile, tp)) {
+            if (tp.empty()) {
+                txt += '\n';
+                continue;
+            }
             int n = tp.end() - tp.begin();
             txt += tp;
             for (int t=0;t<n;t++) {
