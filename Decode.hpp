@@ -1,17 +1,17 @@
 #ifndef DEC
 #define DEC
 #include "HuffStruct.hpp"
-bool taken = false;
 #include <bitset>
 
-string Decode(MinHeap *root) {
+void Decode(MinHeap *root) {
 
-    file.open("out.txt", ios::in | ios::out);
-    string dec1;
+    file.open("out.txt", ios::in | ios::out | ios::binary);
+    string dec1 = "";
     if (file.is_open()) {
         string tp;
         while (getline(file, tp)) {
-            for (int t=0;t<tp.length();t++) {
+            int n = tp.end() - tp.begin();
+            for (int t=0;t<n;t++) {
                 int x = (int)tp[t];
                 if (x < 0)
                     x += 256;
@@ -25,7 +25,7 @@ string Decode(MinHeap *root) {
     MinHeap *Node = root;
     int n = dec1.end() - dec1.begin();
     string out = "";
-    for (int t=0;t<=n;t++) {
+    for (int t=0;t<n;t++) {
         if (dec1[t] == '0')
             root = root->left;
         else
@@ -36,8 +36,8 @@ string Decode(MinHeap *root) {
             root = Node;
         }
     }
-    out += '\0';
-    cout << out;
-    return out;
+    file.open("dec.txt",  ios::out | ios::binary);
+    file << out;
+    file.close();
 }
 #endif

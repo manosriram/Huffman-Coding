@@ -6,17 +6,16 @@
 #include <bitset>
 #include <vector>
 #include "BuildTree.hpp"
-fstream file;
-unsigned char acc;
-int bitcount;
 using namespace std;
+fstream file;
 string txt;
+
 void search(char c, MinHeap *root) {
     if (!root)
         return;
 
     if (root->isLeaf && c == root->character) {
-        cout << "Found " << c << ", has frequency " << root->freq << endl;
+        // cout << "Charater " << c << ", has frequency " << root->freq << endl;
         v.push_back(path);
         return;
     }
@@ -31,18 +30,21 @@ void search(char c, MinHeap *root) {
 
 unsigned char ch;
 int bitC = 0;
+
 void writeBit(int bit) {
     ch = (ch << 1) | bit;
     if (++bitC == 8) {
-        int sz = 8; 
         file << ch;
         ch = 0;
         bitC = 0;
     }
 }
+
 MinHeap *Encode(map<char, pair<int, string> > mp,
         priority_queue<pair< double, MinHeap *>, vector<pair<double, MinHeap *> >, greater<pair< double, MinHeap *>> > q, MinHeap *root) {
-    file.open("out.txt", ios::out | ios::binary);
+
+    file.open("out.txt", ios::in | ios::out | ios::binary);
+
     for (auto t = mp.begin(); t!=mp.end();++t) {
         search(t->first, root);
         t->second.second = v[0];
@@ -51,7 +53,7 @@ MinHeap *Encode(map<char, pair<int, string> > mp,
 
     for (int t=0;t<txt.length();t++) {
         int n = mp[txt[t]].second.end() - mp[txt[t]].second.begin();
-        for (int t1=0;t1<mp[txt[t]].second.length();t1++) {
+        for (int t1=0;t1<n;t1++) {
             char temp = mp[txt[t]].second[t1];
 
             if (temp == '1')
@@ -61,7 +63,6 @@ MinHeap *Encode(map<char, pair<int, string> > mp,
         }
     }
     file.close();
-    cout << endl;
     return root;
 }
 #endif

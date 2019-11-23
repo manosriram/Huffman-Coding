@@ -15,12 +15,12 @@ vector<string> v;
 #include "BuildTree.hpp"
 
 int main() {
-
+    cout << fixed << showpoint;
     priority_queue<pair< double, MinHeap *>, vector<pair<double, MinHeap *> >, greater<pair< double, MinHeap *>> > q;
     map<char, pair<int, string> > mp;
     fstream newFile;
-    newFile.open("in.txt", ios::in | ios::out);
 
+    newFile.open("in.txt", ios::in | ios::out);
     if (newFile.is_open()) {
         string tp;
         while (getline(newFile, tp)) {
@@ -31,15 +31,19 @@ int main() {
                 ++total;
             }
         }
-        newFile.close();
     }
-    cout << "Total Letters: " << total << endl;
-    int total = total * 4;
 
     auto root = BuildTree(mp, q);
     root = Encode(mp, q, root);
-    // pr.first -> Encoded String..
     Decode(root);
-    
-    newFile.close();
+
+    FILE *fp = fopen("out.txt", "r");
+    fseek(fp, 0L, SEEK_END);
+    int sz = ftell(fp);
+    fclose(fp);
+
+    cout << "Input File Size: " << total << " Bytes." << '\n';;
+    cout << "Output File Size: " << sz << " Bytes." << '\n';
+    cout << setprecision(5);
+    cout << "Compression Rate: " << (long double)((long double)sz/(long double) total)*100 << " %";
 }
