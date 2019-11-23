@@ -44,8 +44,6 @@ int reverseByte(int num) {
 
 void writeByte(int byte) {
     //byte = reverseByte(byte);
-    file.write((char *) &ch, sizeof(char));
-    return;
     int n = sizeof(int);
     while (byte) {
         file << (byte & 1);
@@ -61,17 +59,25 @@ void writeByte(int byte) {
 
 
 void writeBit(int bit) {
-    ch |= (bit << bitC);
-
+    ch = (ch << 1) | bit;
+    //cout << "Ch: " << (int)ch << endl;
     if (++bitC == 8) {
-        writeByte(ch);
+        int sz = 8; 
+        while (ch) {
+            file << (ch & 1);
+            ch >>= 1;
+            sz--;
+        }
+        while (sz--) {
+            file << 0;
+        }
         bitC = 0;
         ch = 0;
     }
 }
 MinHeap *Encode(map<char, pair<int, string> > mp,
         priority_queue<pair< double, MinHeap *>, vector<pair<double, MinHeap *> >, greater<pair< double, MinHeap *>> > q, MinHeap *root) {
-    file.open("out.txt", ios::out | ios::binary);
+    file.open("out.txt", ios::out);
     for (auto t = mp.begin(); t!=mp.end();++t) {
         search(t->first, root);
         t->second.second = v[0];
@@ -86,8 +92,10 @@ MinHeap *Encode(map<char, pair<int, string> > mp,
                 writeBit(1);
             else
                 writeBit(0);
+            // cout << temp;
         }
     }
+    file.close();
     return root;
 }
 #endif
