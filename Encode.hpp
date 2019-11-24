@@ -15,7 +15,7 @@ void search(char c, MinHeap *root) {
         return;
 
     if (root->isLeaf && c == root->character) {
-        // cout << "Charater " << c << ", has frequency " << root->freq << endl;
+        cout << "Charater " << c << ", has path " << path << "\t" << root->freq << endl;
         v.push_back(path);
         return;
     }
@@ -37,12 +37,23 @@ void writeBit(int bit) {
         ch = 0;
         bitC = 0;
     }
+    return;
+}
+
+int calculatePadding(map<char, pair<int, string> > mp) {
+    int bits = 0;
+    for (int t=0;t<store.size();t++) {
+        for (int j=0;j<store[t].length();j++) {
+            bits += mp[store[t][j]].second.length();
+        }
+    }
+    return bits;
 }
 
 MinHeap *Encode(map<char, pair<int, string> > mp,
         priority_queue<pair< double, MinHeap *>, vector<pair<double, MinHeap *> >, greater<pair< double, MinHeap *>> > q, MinHeap *root) {
 
-    file.open("out.txt", ios::in | ios::out | ios::binary);
+    file.open("out.txt", ios::in | ios::out);
 
     for (auto t = mp.begin(); t!=mp.end();++t) {
         search(t->first, root);
@@ -50,23 +61,29 @@ MinHeap *Encode(map<char, pair<int, string> > mp,
         v.clear();
     }
 
-    for (int t=0;t<txt.length();t++) {
-        if (txt[t] == '\n') {
-            file << '\n' << '\n';
-        }
-        int n = mp[txt[t]].second.end() - mp[txt[t]].second.begin();
-        for (int t1=0;t1<n;t1++) {
-            char temp = mp[txt[t]].second[t1];
+    int eightBitLength = calculatePadding(mp);
+    needed = ((eightBitLength + 8) - (eightBitLength % 8)) - eightBitLength;
 
-            if (temp == '1')
-                writeBit(1);
-            else
-                writeBit(0);
+    cout << eightBitLength << endl;
+    int currentBit_L = 0;
+    for (int t=0;t<store.size();t++) {
+        for (int j=0;j<store[t].length();j++) {
+            char temp = store[t][j];
+            cout << temp << " ";
+            for (int k=0;k<mp[temp].second.length();k++) {
+                char chr = mp[temp].second[k];
 
-            ++byt;
+                if (chr == '1')
+                    writeBit(1);
+                else
+                    writeBit(0);
+            }
         }
     }
-    cout << byt << endl;
+    // cout << "Needed: " << needed << endl;
+    ch <<= needed;
+    file << ch;
+
     file.close();
     return root;
 }

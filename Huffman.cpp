@@ -9,8 +9,9 @@
 using namespace std;
 int total;
 string path = "";
-static int byt;
+int needed;
 vector<string> v;
+vector<string> store;
 #include "Encode.hpp"
 #include "Decode.hpp"
 #include "BuildTree.hpp"
@@ -19,16 +20,16 @@ int main() {
     cout << fixed << showpoint;
     priority_queue<pair< double, MinHeap *>, vector<pair<double, MinHeap *> >, greater<pair< double, MinHeap *>> > q;
     map<char, pair<int, string> > mp;
-    fstream newFile;
 
-    newFile.open("in.txt", ios::in | ios::out);
+    ifstream newFile;
+    newFile.open("in.txt");
+    char ch;
+
     if (newFile.is_open()) {
         string tp;
         while (getline(newFile, tp)) {
-            if (tp.empty()) {
-                txt += '\n';
-                continue;
-            }
+
+            store.push_back(tp);
             int n = tp.end() - tp.begin();
             txt += tp;
             for (int t=0;t<n;t++) {
@@ -38,6 +39,7 @@ int main() {
         }
     }
 
+    file.close();
     auto root = BuildTree(mp, q);
     root = Encode(mp, q, root);
     Decode(root);

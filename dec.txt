@@ -1,17 +1,1 @@
-The Project GutenrcoEBook of Adventures of Huckleberry Finn, Completeby Mark Twain (Samuel Clemen
-
-s)This eBook is for the use of anyone anywhere at no cost and with almostno restrictions whatsoever. You may copy it, give it away or re-useit under the terms of the Project Gutenberg License included with thiseBook or online at www.gutenberg.
-
-netTitle: Adventures of Huckleberry Finn, Compl
-
-eteAuthor: Mark Twain (Samuel Clemen
-
-s)Release Date: August 20, 2006 [EBook #7
-
-6]Last Updated: October 20, 201
-
-2]Language: Engli
-
-sh*** START OF THIS PROJECT GUTENBERG EBOOK HUCKLEBERRY FINN 
-
-***Produced by David Widg
+You will write a program that will first construct a Huffman Tree from a sequence of Characters.  Each leaf at the bottom of the tree will represent just a single Character.  We will allow letters, digits, punctuation, and any other type of Character.Once the Huffman Tree has been built, your program will be able to do two things:tttom of the tree will represent just a single Character.  We will allow letters, digits, punctuation, and any other type of Character.Once the Huffman Tree has been built, your program will be able to do two things:ttts, punctuation, and any other type of Character.Once the Huffman Tree has been built, your program will be able to do two things:
