@@ -20,15 +20,13 @@ int main() {
     cout << fixed << showpoint;
     priority_queue<pair< double, MinHeap *>, vector<pair<double, MinHeap *> >, greater<pair< double, MinHeap *>> > q;
     map<char, pair<int, string> > mp;
+    fstream newFile;
 
-    ifstream newFile;
-    newFile.open("in.txt");
+    newFile.open("in.txt", ios::in | ios::out);
     char ch;
-
     if (newFile.is_open()) {
         string tp;
         while (getline(newFile, tp)) {
-
             store.push_back(tp);
             int n = tp.end() - tp.begin();
             txt += tp;

@@ -9,7 +9,8 @@ void Decode(MinHeap *root) {
     //file.open("out.txt", ios::in | ios::out | ios::binary);
     MinHeap *Node = root;
     string str, decoded;
-    file.open("out.txt", ios::out | ios::in | ios::binary);
+    fstream file;
+    file.open("out.txt", ios::in | ios::binary );
     
     while(getline(file, str)) {
         for (auto t : str) {
@@ -23,11 +24,11 @@ void Decode(MinHeap *root) {
     };
     file.close();
 
-    file.open("dec.txt", ios::out | ios::in | ios::binary);
+    file.open("dec.txt", ios::in | ios::out | ios::trunc);
     int n = decoded.length() - needed;
     for (int t=0;t<n;t++) {
         char temp = decoded[t];
-
+        
         if (temp == '0')
             root = root->left;
         else
@@ -38,7 +39,6 @@ void Decode(MinHeap *root) {
             root = Node;
         }
     }
-    cout << endl;
     file.close();
 
     return;

@@ -53,7 +53,7 @@ int calculatePadding(map<char, pair<int, string> > mp) {
 MinHeap *Encode(map<char, pair<int, string> > mp,
         priority_queue<pair< double, MinHeap *>, vector<pair<double, MinHeap *> >, greater<pair< double, MinHeap *>> > q, MinHeap *root) {
 
-    file.open("out.txt", ios::in | ios::out);
+    file.open("out.txt", ios::in | ios::out | ios::trunc);
 
     for (auto t = mp.begin(); t!=mp.end();++t) {
         search(t->first, root);
@@ -69,7 +69,6 @@ MinHeap *Encode(map<char, pair<int, string> > mp,
     for (int t=0;t<store.size();t++) {
         for (int j=0;j<store[t].length();j++) {
             char temp = store[t][j];
-            cout << temp << " ";
             for (int k=0;k<mp[temp].second.length();k++) {
                 char chr = mp[temp].second[k];
 
