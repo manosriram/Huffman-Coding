@@ -7,11 +7,13 @@
 #include <functional>
 #include "HuffStruct.hpp"
 using namespace std;
+
 int total;
 string path = "";
 int needed;
 vector<string> v;
 vector<string> store;
+
 #include "Encode.hpp"
 #include "Decode.hpp"
 #include "BuildTree.hpp"
@@ -29,7 +31,6 @@ int main() {
         while (getline(newFile, tp)) {
             store.push_back(tp);
             int n = tp.end() - tp.begin();
-            txt += tp;
             for (int t=0;t<n;t++) {
                 ++mp[tp[t]].first;
                 ++total;

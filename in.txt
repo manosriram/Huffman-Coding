@@ -1,3 +1,25 @@
-You will write a program that will first construct a Huffman Tree from a sequence of Characters.  Each leaf at the bottom of the tree will represent just a single Character.  We will allow letters, digits, punctuation, and any other type of Character.
+HuffmanTree is an interface that will be implemented by two classes:  HuffmanInternalNode and HuffmanLeaf.
 
-Once the Huffman Tree has been built, your program will be able to do two things:
+A HuffmanLeaf is a node at the bottom of the Tree.  It has two fields, listed below.  You may not add any other fields to this class.
+
+private Character data -- the Character that this leaf holds
+
+private int count -- the relative frequency of this character (how many times it occurred in the sequence of Characters used to generate the Huffman Tree.)
+
+A HuffmanInternalNode is a node in the tree that is not a leaf.  It has two fields that are self-explanatory.  You may not add any other fields to this class.
+
+private HuffmanTree leftChild, rightChild;
+
+There is a class called HuffmanTools that will contain the three static methods that make this project work.  You will be writing these methods.  They are:
+
+public static HuffmanTree buildHuffmanTree(Iterator symbols) -- The iterator "symbols" will provide a sequence of Character objects.  These are used to construct a Huffman Tree, which is returned by the method.
+
+public static String encode(HuffmanTree tree, Iterator symbols)  -- The first parameter (tree) is the root of an existing Huffman Tree.  The second parameter is an Iterator that will provide a sequence of Character objects.  The return value will be a String of '0' and '1' characters that represent the encoding of the Characters in the Iterator.  For example, if "tree" is the Huffman Tree from the example pictured above, and the Iterator gives you the sequence 'e', 'd', 'd', 'b', 'c' (five separate Character objects), then the return value would be the String "01111100101".  (These are not really bits, they are the characters '0' and '1'.)
+
+public static String decode(HuffmanTree tree, Iterator bits)  -- The first parameter is the root of a HuffmanTree.  The second parameter is an Iterator that will provide a sequence of Character objects that are all either '0' or '1'.  The return value will be a String of characters that represent the decoding of the sequence of 0's and 1's.  For example, if "tree" is the Huffman Tree from the example pictured above, and the Iterator gives you the sequence '1', '1', '0', '1', '0', '1', '1', '1' (eight separate Character objects), then the return value should be the String "decd".
+
+There is a class called InternalTools, which you may ignore, but which you may find helpful while testing your project.  There are two public methods in there:
+
+public static Iterator getCharacterIteratorFromString(String s) -- You give it a string like "01111100101" or possibly "eddbc", and it will return an Iterator that will cycle through the characters in that String.  (See the file PublicTests.java for examples on how to use this method to test the project.)
+
+public static Iterator getCharacterIteratorFromFile(String fileName) -- You give it the name of a text file found in the project folder and it will return an Iterator that will cycle through the characters that were found in the file.  (You could use a big text file as the "sample" sequence of characters from which you  generate a great big Huffman Tree.)
