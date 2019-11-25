@@ -49,4 +49,15 @@
       reduction in the file's size.
 
 ## Decoding Text.
-      To be Documented.
+      Decoding is quite simple. We traverse the Encoded String in th following manner:
+            - Create a New Node and set it to Root.
+            - While Traversing, if the current character is 0, We move to the left branch of root.
+            - If the current character is 1, We move to the right branch of root.
+            - If the root node is a Leaf Node, write the character to the File.
+      
+
+### -- New Line Bug --
+      While writing to the file, New lines are skipped. So, we have to check the number of characters in
+      each line. At the end of line, we write a new line into the file by doing ( file << endl; )
+      Maybe, there's some way around. Will update it as soon as possible.
+      
