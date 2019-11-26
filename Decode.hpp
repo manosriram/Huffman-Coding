@@ -11,8 +11,9 @@ void Decode(MinHeap *root) {
     file.open("out.txt", ios::in | ios::binary );
     vector<string> decoded;
     while(getline(file, str)) {
-        if (str.length() == 0) {
-            decoded.push_back("\n");
+        if (str.empty()) {
+            decoded.push_back("");
+            continue;
         }
         for (auto t : str) {
             int x = (int)t;
@@ -27,13 +28,13 @@ void Decode(MinHeap *root) {
 
     file.open("dec.txt", ios::in | ios::out | ios::trunc);
     int n = decoded.size();
-    int cC = 0, cL = 0;
+    bool next = false;
 
     for (int t=0;t<n;t++) {
         string g = decoded[t];
         int tempN = g.end() - g.begin();
-        if (g == "\n") {
-            file << endl;
+        if (tempN == 0) {
+            next = true;
             continue;
         }
         for (int j=0;j<tempN;j++) {
@@ -45,16 +46,13 @@ void Decode(MinHeap *root) {
                 root = root->right;
 
             if (root->isLeaf) {
-                ++cC;
-                if (pr[cL] == cC) {
-                    ++cL;
-                    cC = 0;
-                    root = Node;
-                    continue;
-                }
                 file << root->character;
                 root = Node;
             }
+        }
+        if (next) {
+            file << endl;
+            next = false;
         }
     }
     file.close();

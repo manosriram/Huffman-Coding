@@ -28,24 +28,17 @@ int main() {
 
     newFile.open("in.txt", ios::in | ios::out);
     char ch;
-    int lvl = -1;
     if (newFile.is_open()) {
         string tp;
         while (getline(newFile, tp)) {
-            ++lvl;
-            pr[lvl] = 0;
             int n = tp.end() - tp.begin();
             for (int t=0;t<n;t++) {
                 ++mp[tp[t]].first;
                 ++total;
-                ++pr[lvl];
             }
             store.push_back(tp);
         }
     }
-
-    for (auto t = pr.begin(); t != pr.end(); t++)
-        cout << t->first << " " << t->second << endl;
 
     file.close();
     auto root = BuildTree(mp, q);
