@@ -3,20 +3,20 @@
 ![Tree](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi2.wp.com%2Fwww.techiedelight.com%2Fwp-content%2Fuploads%2F2016%2F11%2FHuffman-Coding-6.png%3Fresize%3D426%252C413%26ssl%3D1&f=1&nofb=1)
 
 ## Introduction.
-      Huffman code is a particular type of optimal prefix code that is commonly used for lossless data compression.
-      Huffman coding, an algorithm developed by David A. Huffman while he was a Sc.D. student at MIT, and published
-      in the 1952 paper "A Method for the Construction of Minimum-Redundancy Codes".
+      Huffman code is a particular type of optimal prefix code that is commonly used for lossless data 
+      compression. Huffman coding, an algorithm developed by David A. Huffman while he was a Sc.D. student
+      at MIT, and published in the 1952 paper "A Method for the Construction of Minimum-Redundancy Codes".
 
-      Huffman Algorithm is designed in such a way that each letter is given a code to access it. More frequent 
-      letters are given smaller codes and less frequent letters are given bigger codes. It is because, with smaller
-      codes, more frequent letters can be accessed many number of times quickly.
+      Huffman Algorithm is designed in such a way that each letter is given a code to access it. More
+      frequent letters are given smaller codes and less frequent letters are given bigger codes.
+      It is because, with smaller codes, more frequent letters can be accessed many number of times quickly.
       
-      Each Letter has a frequency. A Priority Queue is Constructed on these frequencies where Higher Priority is
-      given to lower frequency.
+      Each Letter has a frequency. A Priority Queue is Constructed on these frequencies where Higher Priority
+      is given to lower frequency.
 
 ## Construction of Huffman-Tree.
-      A Node has a frequency count (Refer HuffStruct.hpp). First, insert all unique letter's frequencies into the
-      queue. Then, do the following:
+      A Node has a frequency count (Refer HuffStruct.hpp). First, insert all unique letter's frequencies
+      into the queue. Then, do the following:
       - While, there is more than 1 element in the queue,
           - Remove Two Nodes from the queue's front (Nodes with least frequencies).
           - Create a new node which is not a leaf node and has the frequency of (Node1's + Node2's) frequency.
@@ -64,4 +64,5 @@
       Input File: in.txt
       Compressed File: compressed.txt
       Decoded File: decoded.txt
+      Code Mappings: table.txt
       Run: g++ -std=c++17 Huffman.cpp
