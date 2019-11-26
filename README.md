@@ -64,3 +64,4 @@
       Input File: in.txt
       Compressed File: compressed.txt
       Decoded File: decoded.txt
+      Run: g++ -std=c++17 Huffman.cpp
