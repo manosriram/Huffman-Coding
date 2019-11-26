@@ -15,7 +15,6 @@ void search(char c, MinHeap *root) {
         return;
 
     if (root->isLeaf && c == root->character) {
-        //cout << "Charater " << c << ", has path " << path << "\t" << root->freq << endl;
         v.push_back(path);
         return;
     }
@@ -63,15 +62,14 @@ MinHeap *Encode(map<char, pair<int, string> > mp,
 
     int eightBitLength = calculatePadding(mp);
     needed = ((eightBitLength + 8) - (eightBitLength % 8)) - eightBitLength;
-
-    cout << eightBitLength << endl;
-    int currentBit_L = 0;
-
+    
     for (int t=0;t<store.size();t++) {
         if (store[t].empty()) {
             file << endl;
+            continue;
         }
         for (int j=0;j<store[t].length();j++) {
+            ++mm[t];
             char temp = store[t][j];
             for (int k=0;k<mp[temp].second.length();k++) {
                 char chr = mp[temp].second[k];
@@ -84,7 +82,6 @@ MinHeap *Encode(map<char, pair<int, string> > mp,
         }
         file << endl;
     }
-    //cout << "Needed: " << needed << endl;
     ch <<= needed;
     file << ch;
     file.close();

@@ -25,20 +25,28 @@ void Decode(MinHeap *root) {
         }
     };
     file.close();
+    int sz = decoded.size() - 1;
+    cout << needed << endl;
+    cout << sz << endl;
+    decoded[sz] = decoded[sz].substr(0, sz - needed + 1);
 
-    file.open("dec.txt", ios::in | ios::out | ios::trunc);
+    file.open("decoded.txt", ios::in | ios::out | ios::trunc);
     int n = decoded.size();
     bool next = false;
+    int currentChars = 0, line = 0;
 
     for (int t=0;t<n;t++) {
         string g = decoded[t];
         int tempN = g.end() - g.begin();
-        if (tempN == 0) {
-            next = true;
-            continue;
-        }
+
         for (int j=0;j<tempN;j++) {
             char tempCh = decoded[t][j];
+            if (currentChars == mm[line]) {
+                file << endl;
+                currentChars = 0;
+                ++line;
+            }
+
             if (tempCh == '0')
                 root = root->left;
 
@@ -46,14 +54,12 @@ void Decode(MinHeap *root) {
                 root = root->right;
 
             if (root->isLeaf) {
+                ++currentChars;
                 file << root->character;
                 root = Node;
             }
         }
-        if (next) {
-            file << endl;
-            next = false;
-        }
+
     }
     file.close();
     return;

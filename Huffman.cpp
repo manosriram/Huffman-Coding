@@ -12,10 +12,8 @@ using namespace std;
 int total;
 string path = "";
 int needed;
-vector<string> v;
-vector<string> store;
-map<int, int> pr;
-
+vector<string> v, store;
+map<int, int> mm;
 #include "Encode.hpp"
 #include "Decode.hpp"
 #include "BuildTree.hpp"
@@ -24,9 +22,9 @@ int main() {
     cout << fixed << showpoint;
     priority_queue<pair< double, MinHeap *>, vector<pair<double, MinHeap *> >, greater<pair< double, MinHeap *>> > q;
     map<char, pair<int, string> > mp;
+    
     fstream newFile;
-
-    newFile.open("in.txt", ios::in | ios::out);
+    newFile.open("in.txt", ios::in | ios::out); 
     char ch;
     if (newFile.is_open()) {
         string tp;
