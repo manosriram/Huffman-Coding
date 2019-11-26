@@ -58,3 +58,9 @@
       We count the number of characters in each line, when the current count of characters is equal to
       the total count of characters in that line, then we write a new line and reset the character count
       and increment the line value.
+
+
+## Usage.
+      Input File: in.txt
+      Compressed File: compressed.txt
+      Decoded File: decoded.txt
