@@ -52,7 +52,7 @@ int calculatePadding(map<char, pair<int, string> > mp) {
 MinHeap *Encode(map<char, pair<int, string> > mp,
         priority_queue<pair< double, MinHeap *>, vector<pair<double, MinHeap *> >, greater<pair< double, MinHeap *>> > q, MinHeap *root) {
 
-    file.open("out.txt", ios::in | ios::out | ios::trunc);
+    file.open("compressed.txt", ios::in | ios::out | ios::trunc);
 
     for (auto t = mp.begin(); t!=mp.end();++t) {
         search(t->first, root);

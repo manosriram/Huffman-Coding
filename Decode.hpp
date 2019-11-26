@@ -8,7 +8,7 @@ void Decode(MinHeap *root) {
     MinHeap *Node = root;
     string str;
     fstream file;
-    file.open("out.txt", ios::in | ios::binary );
+    file.open("compressed.txt", ios::in | ios::binary );
     vector<string> decoded;
     while(getline(file, str)) {
         if (str.empty()) {
@@ -26,8 +26,6 @@ void Decode(MinHeap *root) {
     };
     file.close();
     int sz = decoded.size() - 1;
-    cout << needed << endl;
-    cout << sz << endl;
     decoded[sz] = decoded[sz].substr(0, sz - needed + 1);
 
     file.open("decoded.txt", ios::in | ios::out | ios::trunc);

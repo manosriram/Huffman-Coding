@@ -43,7 +43,7 @@ int main() {
     root = Encode(mp, q, root);
     Decode(root);
 
-    FILE *fp = fopen("out.txt", "r");
+    FILE *fp = fopen("compressed.txt", "r");
     fseek(fp, 0L, SEEK_END);
     int sz = ftell(fp);
     fclose(fp);
