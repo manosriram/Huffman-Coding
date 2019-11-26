@@ -29,7 +29,6 @@ MinHeap *BuildTree(map<char, pair<int, string> > mp,
         hp->left = tp1;
         hp->right = tp2;
         hp->isLeaf = false;
-        hp->character = '\n';
 
         q.push(make_pair(hp->freq, hp));
     }

@@ -10,11 +10,8 @@ void Decode(MinHeap *root) {
     fstream file;
     file.open("compressed.txt", ios::in | ios::binary );
     vector<string> decoded;
+
     while(getline(file, str)) {
-        if (str.empty()) {
-            decoded.push_back("");
-            continue;
-        }
         for (auto t : str) {
             int x = (int)t;
 
@@ -24,12 +21,13 @@ void Decode(MinHeap *root) {
             decoded.push_back(bitset<8>(x).to_string());
         }
     };
+
     file.close();
     int sz = decoded.size() - 1;
     decoded[sz] = decoded[sz].substr(0, sz - needed + 1);
 
     file.open("decoded.txt", ios::in | ios::out | ios::trunc);
-    int n = decoded.size();
+    int n = decoded.size() - 1;
     bool next = false;
     int currentChars = 0, line = 0;
 
@@ -57,7 +55,6 @@ void Decode(MinHeap *root) {
                 root = Node;
             }
         }
-
     }
     file.close();
     return;

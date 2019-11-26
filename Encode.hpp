@@ -80,7 +80,6 @@ MinHeap *Encode(map<char, pair<int, string> > mp,
                     writeBit(0);
             }
         }
-        file << endl;
     }
     ch <<= needed;
     file << ch;

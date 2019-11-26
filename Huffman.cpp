@@ -30,17 +30,19 @@ int main() {
         string tp;
         while (getline(newFile, tp)) {
             int n = tp.end() - tp.begin();
+            store.push_back(tp);
             for (int t=0;t<n;t++) {
                 ++mp[tp[t]].first;
                 ++total;
             }
-            store.push_back(tp);
         }
     }
 
     file.close();
     auto root = BuildTree(mp, q);
+    cout << "Compressing..." << endl;
     root = Encode(mp, q, root);
+    cout << "Decompressing..." << endl;
     Decode(root);
 
     FILE *fp = fopen("compressed.txt", "r");
