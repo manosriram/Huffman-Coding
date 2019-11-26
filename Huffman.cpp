@@ -14,7 +14,6 @@ string path = "";
 int needed;
 vector<string> v, store;
 map<int, int> mm;
-map<char, string> table;
 #include "Encode.hpp"
 #include "Decode.hpp"
 #include "BuildTree.hpp"
@@ -24,12 +23,12 @@ int main() {
     priority_queue<pair< double, MinHeap *>, vector<pair<double, MinHeap *> >, greater<pair< double, MinHeap *>> > q;
     map<char, pair<int, string> > mp;
     
-    fstream newFile;
-    newFile.open("in.txt", ios::in | ios::out); 
+    fstream file;
+    file.open("in.txt", ios::in | ios::out); 
     char ch;
-    if (newFile.is_open()) {
+    if (file.is_open()) {
         string tp;
-        while (getline(newFile, tp)) {
+        while (getline(file, tp)) {
             int n = tp.end() - tp.begin();
             store.push_back(tp);
             for (int t=0;t<n;t++) {
