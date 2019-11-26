@@ -14,6 +14,7 @@ string path = "";
 int needed;
 vector<string> v, store;
 map<int, int> mm;
+map<char, string> table;
 #include "Encode.hpp"
 #include "Decode.hpp"
 #include "BuildTree.hpp"

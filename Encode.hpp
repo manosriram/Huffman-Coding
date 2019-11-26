@@ -16,6 +16,7 @@ void search(char c, MinHeap *root) {
 
     if (root->isLeaf && c == root->character) {
         v.push_back(path);
+        table[root->character] = path;
         return;
     }
 
@@ -85,6 +86,11 @@ MinHeap *Encode(map<char, pair<int, string> > mp,
     file << ch;
     file.close();
 
+    file.open("table.txt", ios::out | ios::trunc);
+    for (auto t = table.begin(); t != table.end();t++) {
+        file << t->first << " " << t->second << endl;
+    }
+    file.close();
     return root;
 }
 #endif
