@@ -25,7 +25,6 @@ int main() {
     
     fstream file;
     file.open("in.txt", ios::in | ios::out); 
-    char ch;
     if (file.is_open()) {
         string tp;
         while (getline(file, tp)) {
